@@ -9,6 +9,7 @@ import sys
 import threading
 import time
 
+from absl import app
 from absl import flags
 from absl import logging
 import numpy as np
@@ -178,9 +179,9 @@ def run(output_dir, tokenizer_vocab_path):
     example_ids.to_csv(os.path.join(output_dir, f'{subset}.csv'))
 
 
-def main():
+def main(_):
   run(FLAGS.output_dir, FLAGS.tokenizer_vocab_path)
 
 
 if __name__ == '__main__':
-  main()
+  app(main)
