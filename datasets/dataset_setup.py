@@ -456,6 +456,13 @@ def download_librispeech(dataset_dir, tmp_dir, train_tokenizer):
       subprocess.Popen(
           f'tar xzvf {split}-{version}.tar.gz', shell=True).communicate()
 
+  # TODO: unpacking these tars produces a new dir called LibeSpeech which has train-clean-100,
+  # train-clean-360, train-other-500, dev-clean, dev-other, test-clean inside them.
+  
+  # To have the tokenizer do its job, need to mvoe those folder one level up
+  # otherwise, this can be done manually and then libespeech_tokenizer.run() can be called directly
+  # I also noted that the tokenizer created is copied to the working directory if librespeech_tokenizer is invoked from terminal
+  # this needs to be moved manually to the tmp_dir before calling the pre-process
   tars = [
       'raw-metadata.tar.gz',
       'train-clean-100.tar.gz',

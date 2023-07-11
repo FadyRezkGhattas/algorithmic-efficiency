@@ -26,7 +26,7 @@ rename = tf.io.gfile.rename
 flags.DEFINE_string('raw_input_dir',
                     '',
                     'Path to the raw training data directory.')
-flags.DEFINE_string('output_dir', '', 'Dir to write the processed data to.')
+flags.DEFINE_string('data_dir', '', 'Dir to write the processed data to.')
 flags.DEFINE_string('tokenizer_vocab_path',
                     '',
                     'Path to sentence piece tokenizer vocab file.')
@@ -152,7 +152,7 @@ def load_audio(audio_path):
   return audio
 
 
-def run(input_dir, output_dir, tokenizer_vocab_path):
+def run(output_dir, tokenizer_vocab_path):
   tokenizer = librispeech_tokenizer.load_tokenizer(tokenizer_vocab_path)
   os.makedirs(output_dir, exist_ok=True)
 
@@ -179,7 +179,7 @@ def run(input_dir, output_dir, tokenizer_vocab_path):
 
 
 def main():
-  run(FLAGS.input_dir, FLAGS.output_dir, FLAGS.tokenizer_vocab_path)
+  run(FLAGS.data_dir, FLAGS.tokenizer_vocab_path)
 
 
 if __name__ == '__main__':
