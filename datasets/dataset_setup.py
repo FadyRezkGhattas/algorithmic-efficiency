@@ -292,17 +292,17 @@ def download_fastmri(data_dir,
   # Download fastmri train dataset
   logging.info(
       'Downloading fastmri train dataset from {}'.format(fastmri_train_url))
-  _download_url(url=fastmri_train_url, data_dir=data_dir).download()
+  _download_url(url=fastmri_train_url, data_dir=data_dir)
 
   # Download fastmri val dataset
   logging.info(
       'Downloading fastmri val dataset from {}'.format(fastmri_val_url))
-  _download_url(url=fastmri_val_url, data_dir=data_dir).download()
+  _download_url(url=fastmri_val_url, data_dir=data_dir)
 
   # Download fastmri test dataset
   logging.info(
       'Downloading fastmri test dataset from {}'.format(fastmri_test_url))
-  _download_url(url=fastmri_test_url, data_dir=data_dir).download()
+  _download_url(url=fastmri_test_url, data_dir=data_dir)
 
 
 def extract(source, dest):
@@ -345,12 +345,12 @@ def download_imagenet(data_dir, imagenet_train_url, imagenet_val_url):
   # Download imagnet train dataset
   logging.info(
       'Downloading imagenet train dataset from {}'.format(imagenet_train_url))
-  _download_url(url=imagenet_train_url, data_dir=data_dir).download()
+  _download_url(url=imagenet_train_url, data_dir=data_dir)
 
   # Download imagenet val dataset
   logging.info('Donwloading imagenet validation dataset from {}'.format(
       imagenet_val_url))
-  _download_url(url=imagenet_val_url, data_dir=data_dir).download()
+  _download_url(url=imagenet_val_url, data_dir=data_dir)
 
   # Download imagenet test set
   download_imagenet_v2(data_dir)
