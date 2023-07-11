@@ -85,8 +85,8 @@ FASTMRI_TRAIN_TAR_FILENAME = 'knee_singlecoil_train.tar'
 FASTMRI_VAL_TAR_FILENAME = 'knee_singlecoil_val.tar'
 FASTMRI_TEST_TAR_FILENAME = 'knee_singlecoil_test.tar'
 
-from datasets import librispeech_preprocess
-from datasets import librispeech_tokenizer
+#from datasets import librispeech_preprocess
+#from datasets import librispeech_tokenizer
 
 flags.DEFINE_boolean(
     'interactive_deletion',
@@ -463,6 +463,7 @@ def download_librispeech(dataset_dir, tmp_dir, train_tokenizer):
   # otherwise, this can be done manually and then libespeech_tokenizer.run() can be called directly
   # I also noted that the tokenizer created is copied to the working directory if librespeech_tokenizer is invoked from terminal
   # this needs to be moved manually to the tmp_dir before calling the pre-process
+  '''
   tars = [
       'raw-metadata.tar.gz',
       'train-clean-100.tar.gz',
@@ -486,6 +487,7 @@ def download_librispeech(dataset_dir, tmp_dir, train_tokenizer):
         input_dir=tmp_librispeech_dir,
         output_dir=librispeech_dir,
         tokenizer_vocab_path=tokenizer_vocab_path)
+  '''
 
 
 def download_mnist(data_dir):
