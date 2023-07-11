@@ -26,7 +26,7 @@ rename = tf.io.gfile.rename
 flags.DEFINE_string('raw_input_dir',
                     '',
                     'Path to the raw training data directory.')
-flags.DEFINE_string('data_dir', '', 'Dir to write the processed data to.')
+flags.DEFINE_string('output_dir', '', 'Dir to write the processed data to.')
 flags.DEFINE_string('tokenizer_vocab_path',
                     '',
                     'Path to sentence piece tokenizer vocab file.')
@@ -179,7 +179,7 @@ def run(output_dir, tokenizer_vocab_path):
 
 
 def main():
-  run(FLAGS.data_dir, FLAGS.tokenizer_vocab_path)
+  run(FLAGS.output_dir, FLAGS.tokenizer_vocab_path)
 
 
 if __name__ == '__main__':
