@@ -112,7 +112,7 @@ def preprocess_data(data_folder, tokenizer, split, output_dir):
 
         targets = tokenizer.tokenize(trans).numpy().astype(np.int32)
 
-        save_path = os.path.join(output_dir, 'librespeech', split)
+        save_path = os.path.join(output_dir, 'librispeech', split)
         np.save('{}/{}_audio.npy'.format(save_path, utt), sound)
         np.save('{}/{}_targets.npy'.format(save_path, utt), targets)
 
