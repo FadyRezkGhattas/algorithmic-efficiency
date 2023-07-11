@@ -8,6 +8,7 @@ import os
 import tempfile
 from typing import Dict
 
+from absl import app
 from absl import flags
 from absl import logging
 import sentencepiece as spm
@@ -21,7 +22,7 @@ rename = tf.io.gfile.rename
 
 Features = Dict[str, tf.Tensor]
 
-flags.DEFINE_string('input_dir', '', 'Path to training data directory.')
+flags.DEFINE_string('data_dir', '', 'Path to training data directory.')
 flags.DEFINE_boolean(
     'train',
     False,
@@ -137,9 +138,9 @@ def run(train, data_dir):
       logging.info('Tokenizer working correctly!')
 
 
-def main():
+def main(_):
   run(FLAGS.train, FLAGS.data_dir)
 
 
 if __name__ == '__main__':
-  main()
+  app.run(main)
