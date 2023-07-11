@@ -128,6 +128,8 @@ def preprocess_data(data_folder, tokenizer, split):
     for chapter_folder in os.listdir(f'{data_folder}/{speaker_folder}'):
       paths.append((data_folder, speaker_folder, chapter_folder))
 
+  print("Processing {} files in '{}'...".format(len(paths), data_folder))
+  
   sys.stdout.write('\r')
   pool = multiprocessing.dummy.Pool(32)
   file_trans = pool.map(process, paths)
