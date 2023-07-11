@@ -530,7 +530,6 @@ def main(_):
           'download the FastMRI dataset. Sign up for the URLs at '
           'https://fastmri.med.nyu.edu/.')
     download_fastmri(data_dir,
-                     tmp_dir,
                      knee_singlecoil_train_url,
                      knee_singlecoil_val_url,
                      knee_singlecoil_test_url)
