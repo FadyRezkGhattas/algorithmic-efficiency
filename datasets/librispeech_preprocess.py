@@ -45,7 +45,7 @@ librispeech_example_counts = {
     'test-clean': 2620,
     'dev-clean': 2703,
     'dev-other': 2864,
-    'test_other': 2939
+    'test-other': 2939
 }
 
 
