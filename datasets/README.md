@@ -37,7 +37,15 @@ do some basic sanitization in main(), but submitters should not let untrusted
 users run this script on their systems.
 
 ## Librispeech
+Librispeech is downloaded into the temporary folder /tmp/librispeech by default unless overwritten using the --temp_dir flag. To process the downloaded raw data, first unzip the following files in /tmp/librispeech:
+```
+train-clean-100.tar.gz, train-clean-360.tar.gz,
+train-other-500.tar.gz, dev-clean.tar.gz,
+dev-other.tar.gz, test-clean.tar.gz
+```
+The generated directories will be nested in /tmp/librispeech/LibriSpeech. Move those folders one level up to have /tmp/librispeech/train-clean-100, /tmp/librispeech/train-clean-360, etc.
 
+Now, the tokenizer can be built and passed to the pre-processor.
 ### Training SPM Tokenizer
 This step trains a simple sentence piece tokenizer over librispeech training data.
 This tokenizer is then used in later preprocessing step to tokenize transcripts.
@@ -48,12 +56,12 @@ python3 librispeech_tokenizer.py --train --data_dir=$DATA_DIR/librispeech
 
 The trained tokenizer can be loaded back to do sanity check by tokenizing + de-tokenizing a constant string:
 ```bash
-librispeech_tokenizer.py --data_dir=$DATA_DIR/librispeech
+python3 librispeech_tokenizer.py --data_dir=$DATA_DIR/librispeech
 ```
 
 ### Preprocessing Script
 The preprocessing script will generate `.npy` files for audio data, `features.csv` which has paths to saved audio `.npy`, and `trans.csv` which has paths to `features.csv` and transcription data.
 
 ```bash
-python3 librispeech_preprocess.py --data_dir=$DATA_DIR/librispeech --tokenizer_vocab_path=$DATA_DIR/librispeech/spm_model.vocab
+python3 librispeech_preprocess.py --raw_input_dir=/tmp/librispeech --output_dir={YOUR OUTPUT DIRECTORY} --tokenizer_vocab_path={WHERE THE TOKENIZER FILE IS SAVED}
 ```
