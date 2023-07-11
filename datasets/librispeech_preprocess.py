@@ -74,7 +74,7 @@ def report_progress(count, total, start_time):
   sys.stdout.flush()
 
 
-def preprocess_data(data_folder, tokenizer, split):
+def preprocess_data(data_folder, tokenizer, split, output_dir):
   finished = Counter()
   skipped = Counter()
   start_time = time.time()
@@ -112,8 +112,9 @@ def preprocess_data(data_folder, tokenizer, split):
 
         targets = tokenizer.tokenize(trans).numpy().astype(np.int32)
 
-        np.save('data/{}/{}_audio.npy'.format(split, utt), sound)
-        np.save('data/{}/{}_targets.npy'.format(split, utt), targets)
+        save_path = os.path.join(output_dir, 'librespeech', split)
+        np.save('{}/{}_audio.npy'.format(save_path, utt), sound)
+        np.save('{}/{}_targets.npy'.format(save_path, utt), targets)
 
         finished.inc()
         report_progress(finished.val() + skipped.val(),
@@ -129,7 +130,7 @@ def preprocess_data(data_folder, tokenizer, split):
       paths.append((data_folder, speaker_folder, chapter_folder))
 
   print("Processing {} files in '{}'...".format(len(paths), data_folder))
-  
+
   sys.stdout.write('\r')
   pool = multiprocessing.dummy.Pool(32)
   file_trans = pool.map(process, paths)
@@ -155,9 +156,9 @@ def load_audio(audio_path):
   return audio
 
 
-def run(output_dir, tokenizer_vocab_path):
+def run(input_dir, output_dir, tokenizer_vocab_path):
   tokenizer = librispeech_tokenizer.load_tokenizer(tokenizer_vocab_path)
-  os.makedirs(output_dir, exist_ok=True)
+  os.makedirs(input_dir, exist_ok=True)
 
   subset_list = [
       'train-clean-100',
@@ -170,9 +171,9 @@ def run(output_dir, tokenizer_vocab_path):
   ]
   for subset in subset_list:
     logging.info('Processing split = %s...', subset)
-    subset_dir = os.path.join(output_dir, subset)
+    subset_dir = os.path.join(input_dir, subset)
     os.makedirs(subset_dir, exist_ok=True)
-    example_ids, num_entries = preprocess_data(subset_dir, tokenizer, subset)
+    example_ids, num_entries = preprocess_data(subset_dir, tokenizer, subset, output_dir)
 
     if num_entries != librispeech_example_counts[subset]:
       raise ValueError('Preprocessed dataframe final count not equal to '
@@ -182,7 +183,7 @@ def run(output_dir, tokenizer_vocab_path):
 
 
 def main(_):
-  run(FLAGS.output_dir, FLAGS.tokenizer_vocab_path)
+  run(FLAGS.raw_input_dir, FLAGS.output_dir, FLAGS.tokenizer_vocab_path)
 
 
 if __name__ == '__main__':
