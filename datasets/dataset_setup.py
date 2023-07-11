@@ -156,6 +156,12 @@ flags.DEFINE_string(
     'Only necessary if you want this script to `wget` the FastMRI validation '
     'split. If not, you can supply the path to --data_dir in '
     'submission_runner.py.')
+flags.DEFINE_string(
+    'fastmri_knee_singlecoil_test_url',
+    None,
+    'Only necessary if you want this script to `wget` the FastMRI test '
+    'split. If not, you can supply the path to --data_dir in '
+    'submission_runner.py.')
 
 flags.DEFINE_integer(
     'num_decompression_threads',
