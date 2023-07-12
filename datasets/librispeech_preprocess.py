@@ -181,7 +181,7 @@ def run(input_dir, output_dir, tokenizer_vocab_path):
       raise ValueError('Preprocessed dataframe final count not equal to '
                        'expected count: {} vs expected {}'.format(
                            num_entries, librispeech_example_counts[subset]))
-    example_ids.to_csv(os.path.join(output_dir, f'{subset}.csv'))
+    example_ids.to_csv(os.path.join(output_dir, 'librispeech', f'{subset}.csv'))
 
 
 def main(_):
