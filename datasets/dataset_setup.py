@@ -315,12 +315,12 @@ def extract(source, dest):
 
 
 def setup_fastmri(data_dir):
-  train_tar_file_path = os.path.join(data_dir, FASTMRI_TRAIN_TAR_FILENAME)
-  val_tar_file_path = os.path.join(data_dir, FASTMRI_VAL_TAR_FILENAME)
-  test_tar_file_path = os.path.join(data_dir, FASTMRI_TEST_TAR_FILENAME)
+  fastmri_data_dir = os.path.join(data_dir, 'fastmri')
+  train_tar_file_path = os.path.join(fastmri_data_dir, FASTMRI_TRAIN_TAR_FILENAME)
+  val_tar_file_path = os.path.join(fastmri_data_dir, FASTMRI_VAL_TAR_FILENAME)
+  test_tar_file_path = os.path.join(fastmri_data_dir, FASTMRI_TEST_TAR_FILENAME)
 
   # Make train, val and test subdirectories
-  fastmri_data_dir = os.path.join(data_dir, 'fastmri')
   train_data_dir = os.path.join(fastmri_data_dir, 'train')
   os.makedirs(train_data_dir)
   val_data_dir = os.path.join(fastmri_data_dir, 'val')
