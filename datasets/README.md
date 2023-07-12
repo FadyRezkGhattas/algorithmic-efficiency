@@ -66,7 +66,12 @@ The preprocessing script will generate `.npy` files for audio data, `features.cs
 python3 librispeech_preprocess.py --raw_input_dir=/tmp/librispeech --output_dir={YOUR OUTPUT DIRECTORY} --tokenizer_vocab_path={WHERE THE TOKENIZER FILE IS SAVED}
 ```
 ## FastMRI
-It is preferrable to download the links manually onto the experimentation server using curl. Make sure knee_singlecoil_train.tar, knee_singlecoil_val.tar and knee_singlecoil_test.tar are in the datadir. TODO
+Download the links manually onto the experimentation server using curl. Make sure knee_singlecoil_train.tar, knee_singlecoil_val.tar and knee_singlecoil_test.tar are placed in the datadir. Now run:
+```
+python3 dataset_setup.py \
+  --data_dir={YOUR DATA DIR}
+  --fastmri
+```
 
 ## Criteo
 Criteo is currently hosted on a WeTransfer server [here](https://ailab.criteo.com/download-criteo-1tb-click-logs-dataset/). Go to the download link, click download, pause the download, copy the download link from downloads and then do the following:

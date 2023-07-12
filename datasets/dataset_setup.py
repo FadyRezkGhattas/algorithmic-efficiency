@@ -248,7 +248,7 @@ def download_criteo(data_dir,
     unzipped_path = os.path.join(criteo_dir, f'day_{day}.csv')
     unzip_cmd = (f'pigz -d -c -p{num_decompression_threads} "{input_path}" > '
                  f'"{unzipped_path}"')
-    command_str = f'{wget_cmd} && {unzip_cmd}'
+    command_str = f'{unzip_cmd}'
     logging.info(f'Running Criteo download command:\n{command_str}')
     processes.append(subprocess.Popen(command_str, shell=True))
   for p in processes:
@@ -530,20 +530,8 @@ def main(_):
     download_mnist(data_dir)
 
   if FLAGS.all or FLAGS.fastmri:
-    logging.info('Downloading FastMRI...')
-    knee_singlecoil_train_url = FLAGS.fastmri_knee_singlecoil_train_url
-    knee_singlecoil_val_url = FLAGS.fastmri_knee_singlecoil_val_url
-    knee_singlecoil_test_url = FLAGS.fastmri_knee_singlecoil_test_url
-    if (knee_singlecoil_train_url is None or knee_singlecoil_val_url is None or
-        knee_singlecoil_val_url is None):
-      raise ValueError(
-          'Must provide both --fastmri_knee_singlecoil_{train,val}_url to '
-          'download the FastMRI dataset. Sign up for the URLs at '
-          'https://fastmri.med.nyu.edu/.')
-    download_fastmri(data_dir,
-                     knee_singlecoil_train_url,
-                     knee_singlecoil_val_url,
-                     knee_singlecoil_test_url)
+    logging.info('Setting up FastMRI...')
+    setup_fastmri(data_dir)
 
   if FLAGS.all or FLAGS.imagenet:
     flags.mark_flag_as_required('imagenet_train_url')
