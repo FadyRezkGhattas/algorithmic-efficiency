@@ -531,6 +531,7 @@ def main(_):
 
   if FLAGS.all or FLAGS.fastmri:
     logging.info('Setting up FastMRI...')
+    data_dir = os.path.join(data_dir, 'fastmri')
     setup_fastmri(data_dir)
 
   if FLAGS.all or FLAGS.imagenet:
