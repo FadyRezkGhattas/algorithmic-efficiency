@@ -368,6 +368,7 @@ def setup_imagenet(data_dir, framework=None):
 
 
 def setup_imagenet_jax(data_dir):
+  data_dir = os.path.join(data_dir, 'imagenet')
   train_tar_file_path = os.path.join(data_dir, IMAGENET_TRAIN_TAR_FILENAME)
   val_tar_file_path = os.path.join(data_dir, IMAGENET_VAL_TAR_FILENAME)
 
@@ -386,6 +387,7 @@ def setup_imagenet_jax(data_dir):
 
 
 def setup_imagenet_pytorch(data_dir):
+  data_dir = os.path.join(data_dir, 'imagenet')
   train_tar_file_path = os.path.join(data_dir, IMAGENET_TRAIN_TAR_FILENAME)
   val_tar_file_path = os.path.join(data_dir, IMAGENET_VAL_TAR_FILENAME)
 
