@@ -17,7 +17,7 @@ links that are emailed to you for "knee_singlecoil_train" and
 
 ImageNet:
 Register on https://image-net.org/ and run this script with the links to the
-ILSVRC2012 train and validation images.
+ILSVRC2012 train and validation images. Also, for the ImagenetV2 test set, the link was moved to huggingface. Since the script downloads using tfds, then tensorflow==4.9.2 must be downloaded to include this [update](https://github.com/tensorflow/datasets/pull/4848).
 
 Note for tfds ImageNet, you may have to increase the max number of files allowed
 open at once using `ulimit -n 8192`.
@@ -41,7 +41,7 @@ Librispeech is downloaded into the temporary folder /tmp/librispeech by default 
 ```
 train-clean-100.tar.gz, train-clean-360.tar.gz,
 train-other-500.tar.gz, dev-clean.tar.gz,
-dev-other.tar.gz, test-clean.tar.gz
+dev-other.tar.gz, test-clean.tar.gz, test-other.tar.gz
 ```
 The generated directories will be nested in /tmp/librispeech/LibriSpeech. Move those folders one level up to have /tmp/librispeech/train-clean-100, /tmp/librispeech/train-clean-360, etc.
 
