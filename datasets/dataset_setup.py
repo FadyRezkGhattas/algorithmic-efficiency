@@ -324,7 +324,7 @@ def setup_fastmri(data_dir):
   train_data_dir = os.path.join(fastmri_data_dir, 'train')
   os.makedirs(train_data_dir)
   val_data_dir = os.path.join(fastmri_data_dir, 'val')
-  os.makedirsval_data_dir()
+  os.makedirs(val_data_dir)
   test_data_dir = os.path.join(fastmri_data_dir, 'test')
   os.makedirs(test_data_dir)
 
