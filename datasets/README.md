@@ -66,7 +66,7 @@ The preprocessing script will generate `.npy` files for audio data, `features.cs
 python3 librispeech_preprocess.py --raw_input_dir=/tmp/librispeech --output_dir={YOUR OUTPUT DIRECTORY} --tokenizer_vocab_path={WHERE THE TOKENIZER FILE IS SAVED}
 ```
 ## FastMRI
-Download the links manually onto the experimentation server using curl. Make sure knee_singlecoil_train.tar, knee_singlecoil_val.tar and knee_singlecoil_test.tar are placed in the datadir. Now run:
+Download the links manually onto the experimentation server using curl. Make sure knee_singlecoil_train.tar, knee_singlecoil_val.tar and knee_singlecoil_test.tar are placed in the {datadir}/fastmri. Now run:
 ```
 python3 dataset_setup.py \
   --data_dir={YOUR DATA DIR}
