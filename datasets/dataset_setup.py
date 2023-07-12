@@ -330,11 +330,11 @@ def setup_fastmri(data_dir):
 
   # Unzip tar file into subdirectories
   logging.info('Unzipping {} to {}'.format(train_tar_file_path,
-                                           fastmri_data_dir))
+                                           train_data_dir))
   extract(train_tar_file_path, train_data_dir)
-  logging.info('Unzipping {} to {}'.format(val_tar_file_path, fastmri_data_dir))
+  logging.info('Unzipping {} to {}'.format(val_tar_file_path, val_data_dir))
   extract(val_tar_file_path, val_data_dir)
-  logging.info('Unzipping {} to {}'.format(val_tar_file_path, fastmri_data_dir))
+  logging.info('Unzipping {} to {}'.format(val_tar_file_path, test_data_dir))
   extract(test_tar_file_path, test_data_dir)
   logging.info('Set up imagenet dataset for jax framework complete')
 
