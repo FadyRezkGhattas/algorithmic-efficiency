@@ -84,3 +84,72 @@ curl -L -o criteo.zip "{ENTER YOUR LINK}"
 unzip criteo.zip
 ```
 Please note that the temp_dir use above should be the same passed below.
+```
+cd {algorithmic-efficiency repo}
+python datasets/dataset_setup.py --criteo \
+    --criteo \
+    --data_dir={your data directory} \
+    --temp_dir={your temp directory as above}
+```
+This will unpack the day_*.gz files from temp directory to your data directory.
+
+## Test Scripts
+Below are scripts used to test the dataset access. Please note that these scripts are run inside a docker image inherited from fadyrezk/jax_learned_optimization docker image. Inside this image, the following was run:
+```
+conda install ffmpeg
+pip install gputil psutil clu tensorflow-text tensorflow_addons jaxopt tensorflow_probability absl-py==1.0.0 pandas==1.3.5 protobuf==3.20.* six==1.16.0 scikit-learn==1.0.1 h5py==3.7.0 scikit_image==0.19.3 jraph==0.0.6.dev0 sentencepiece==0.1.97 sacrebleu==1.3.1 pydub==0.25.1
+git clone https://github.com/FadyRezkGhattas/algorithmic-efficiency
+cd algorithmic-efficiency
+pip3 install -e '.[full]'
+```
+### OGBG (tested and working)
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=ogbg \
+    --experiment_dir=~/ogbg_test/ \
+    --experiment_name=ogbg_test \
+    --submission_path=reference_algorithms/development_algorithms/ogbg/ogbg_jax/submission.py \
+    --tuning_search_space=reference_algorithms/development_algorithms/ogbg/tuning_search_space.json \
+    --data_dir=/data0/
+
+```
+### LibriSpeech (tested and working)
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=librispeech_conformer \
+    --experiment_dir=~/librispeech_conformer_test/ \
+    --experiment_name=librispeech_conformer_test \
+    --submission_path=reference_algorithms/development_algorithms/librispeech_conformer/librispeech_jax/submission.py \
+    --tuning_search_space=reference_algorithms/development_algorithms/librispeech_conformer/tuning_search_space.json \
+    --data_dir=/data0/librispeech
+
+```
+### FastMRI (tested and working)
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=fastmri \
+    --experiment_dir=~/fastmri_test/ \
+    --experiment_name=fastmri_test \
+    --submission_path=reference_algorithms/development_algorithms/fastmri/fastmri_jax/submission.py \
+    --tuning_search_space=reference_algorithms/development_algorithms/fastmri/tuning_search_space.json \
+    --data_dir=/data0/fastmri
+```
+### ImageNet (tested and working)
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=imagenet_resnet \
+    --experiment_dir=~/imagenet_test/ \
+    --experiment_name=imagenet_test \
+    --submission_path=reference_algorithms/development_algorithms/imagenet_resnet/imagenet_jax/submission.py \
+    --tuning_search_space=reference_algorithms/development_algorithms/imagenet_resnet/tuning_search_space.json \
+    --data_dir=/data0/imagenet \
+    --imagenet_v2_data_dir=/data0/imagenet
+```
+
+### WMT
+
+### Criteo
