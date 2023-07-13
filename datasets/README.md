@@ -150,6 +150,16 @@ python3 submission_runner.py \
     --imagenet_v2_data_dir=/data0/imagenet
 ```
 
+### Criteo (tested and working)
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=criteo1tb \
+    --experiment_dir=~/criteo_test/ \
+    --experiment_name=criteo_test \
+    --submission_path=reference_algorithms/development_algorithms/criteo1tb/criteo1tb_jax/submission.py \
+    --tuning_search_space=reference_algorithms/development_algorithms/criteo1tb/tuning_search_space.json \
+    --data_dir=/data0/criteo
+```
 ### WMT
 
-### Criteo
