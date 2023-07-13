@@ -13,7 +13,7 @@ import tensorflow as tf
 
 from algorithmic_efficiency import data_utils
 
-_NUM_DAY_23_FILES = 36
+_NUM_DAY_23_FILES = 178
 
 # Raw vocab sizes from
 # https://cloud.google.com/tpu/docs/tutorials/dlrm-dcn-2.x#run-model.
