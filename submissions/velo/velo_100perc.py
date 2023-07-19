@@ -101,8 +101,7 @@ def init_optimizer_state(workload: spec.Workload,
       max_training_steps=200_000,
       base_lopt_fn=pretrained_optimizers.aug12_continue_on_bigger_2xbs_200kstep_bigproblem_v2_5620)
   opt_state = opt.init(model_params, num_steps=num_steps)
-  def update(self,
-            updates: chex.ArrayTree,
+  def update(updates: chex.ArrayTree,
             state: chex.ArrayTree,
             params: Optional[chex.ArrayTree] = None,
             *,
@@ -115,15 +114,15 @@ def init_optimizer_state(workload: spec.Workload,
             raise ValueError("Params must not be None!")
 
         if dataclasses.is_dataclass(state):
-            state = self.opt.set_params(state, params)
+            state = opt.set_params(state, params)
         else:
             raise NotImplementedError("Only flax dataclasses are supported!")
 
-        next_state = self.opt.update(state, updates, **extra_args)
+        next_state = opt.update(state, updates, **extra_args)
 
-        step = tree_utils.tree_sub(self.opt.get_params(next_state), params)
+        step = tree_utils.tree_sub(opt.get_params(next_state), params)
 
-        next_state = self.opt.set_params(next_state, ())
+        next_state = opt.set_params(next_state, ())
 
         return step, next_state
   
