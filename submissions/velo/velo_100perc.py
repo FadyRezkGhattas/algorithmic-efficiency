@@ -17,6 +17,7 @@ from flax import jax_utils
 
 from algorithmic_efficiency import spec
 from learned_optimization import tree_utils
+from learned_optimization.research.general_lopt import prefab
 from learned_optimization.research.general_lopt.prefab import LearnedOptimizer
 from learned_optimization.research.general_lopt import pretrained_optimizers
 
@@ -95,38 +96,9 @@ def init_optimizer_state(workload: spec.Workload,
      optimizer_update_fn
     """
   num_steps = 100
-  opt = LearnedOptimizer(
-      num_steps, #TODO: replace this later for individual workloads, maybe use workload.__name__
-      weight_decay=0,
-      max_training_steps=200_000,
-      base_lopt_fn=pretrained_optimizers.aug12_continue_on_bigger_2xbs_200kstep_bigproblem_v2_5620)
-  opt_state = opt.init(model_params, num_steps=num_steps)
-  def update(updates: chex.ArrayTree,
-            state: chex.ArrayTree,
-            params: Optional[chex.ArrayTree] = None,
-            *,
-            extra_args: Optional[Mapping[str, Any]] = None
-        ) -> Tuple[chex.ArrayTree, chex.ArrayTree]:
-        if extra_args is None:
-            extra_args = {}
-
-        if params is None:
-            raise ValueError("Params must not be None!")
-
-        if dataclasses.is_dataclass(state):
-            state = opt.set_params(state, params)
-        else:
-            raise NotImplementedError("Only flax dataclasses are supported!")
-
-        next_state = opt.update(state, updates, **extra_args)
-
-        step = tree_utils.tree_sub(opt.get_params(next_state), params)
-
-        next_state = opt.set_params(next_state, ())
-
-        return step, next_state
-  
-  return jax_utils.replicate(opt_state), update
+  tx = prefab.optax_lopt(100, max_training_steps=200_000)
+  opt_state = tx.init(jax_utils.unreplicate(model_params))
+  return jax_utils.replicate(opt_state), tx.update
 
 def update_params(workload: spec.Workload,
                   current_param_container: spec.ParameterContainer,
