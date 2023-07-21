@@ -82,11 +82,13 @@ class BaseImagenetResNetWorkload(spec.Workload):
 
   @property
   def max_allowed_runtime_sec(self) -> int:
-    return 63_008  # ~17.5 hours
+    # used to be 63_008  # ~17.5 hours
+    return 81_783
 
   @property
   def eval_period_time_sec(self) -> int:
-    return 510  # 8.5 minutes.
+    # used to be 510  ~8.5 minutes.
+    return 661 # ~11 mins (computed as 510*81_783/63_008)
 
   def _build_dataset(
       self,

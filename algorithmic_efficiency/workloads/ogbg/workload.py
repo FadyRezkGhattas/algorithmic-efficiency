@@ -66,11 +66,13 @@ class BaseOgbgWorkload(spec.Workload):
 
   @property
   def max_allowed_runtime_sec(self) -> int:
-    return 18_477  # ~5 hours
+    # used to be 18_477  (~5 hours)
+    return 14_859 # ~4 hours
 
   @property
   def eval_period_time_sec(self) -> int:
-    return 4 * 60
+    # used to be 4 * 60
+    return 193 # computed as 4 * 60 * 14_859 / 18_477
 
   def _build_input_queue(self,
                          data_rng: jax.random.PRNGKey,

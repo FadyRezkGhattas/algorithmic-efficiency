@@ -74,11 +74,13 @@ class BaseCriteo1TbDlrmSmallWorkload(spec.Workload):
 
   @property
   def max_allowed_runtime_sec(self) -> int:
-    return 7703  # ~2 hours
+    #used to be 7703 ~2 hours
+    return 11_387 # ~3.2 hours
 
   @property
   def eval_period_time_sec(self) -> int:
-    return 2 * 60
+    # used to be 2 * 60
+    return 177 # calculated as 2*60*11387/7703
 
   def _build_input_queue(self,
                          data_rng: jax.random.PRNGKey,
