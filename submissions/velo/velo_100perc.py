@@ -25,7 +25,6 @@ from reference_algorithms.target_setting_algorithms.data_selection import \
     data_selection  # pylint: disable=unused-import
 
 _GRAD_CLIP_EPS = 1e-6
-TOTAL_STEPS = 0
 
 @functools.partial(
     jax.pmap,
@@ -93,7 +92,7 @@ def init_optimizer_state(workload: spec.Workload,
      optimizer state
      optimizer_update_fn
     """
-  tx = prefab.optax_lopt(TOTAL_STEPS, max_training_steps=200_000)
+  tx = prefab.optax_lopt(hyperparameters.total_steps, max_training_steps=200_000)
   opt_state = tx.init(jax_utils.unreplicate(model_params))
   return jax_utils.replicate(opt_state), tx.update
 
@@ -140,16 +139,14 @@ def update_params(workload: spec.Workload,
 def get_batch_size(workload_name):
   # Return the global batch size.
   if workload_name == 'criteo1tb':
-    TOTAL_STEPS = 7672
     return 262_144
   elif workload_name == 'fastmri':
-    TOTAL_STEPS = 38021
     return 32
   elif workload_name == 'imagenet_resnet':
-    TOTAL_STEPS = 158845
     return 1024
   elif workload_name == 'ogbg':
-    TOTAL_STEPS = 79460
     return 512
+  elif workload_name == 'mnist':
+    return 64
   else:
     raise ValueError(f'Unsupported workload name: {workload_name}.')
