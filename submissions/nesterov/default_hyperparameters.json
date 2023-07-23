@@ -1,0 +1,17 @@
+{
+    "weight_decay": {
+        "feasible_points": [0]
+    },
+    "learning_rate": {
+        "feasible_points": [0.05]
+    },
+    "beta1": {
+        "feasible_points": [0.9]
+    },
+    "warmup_steps": {
+        "feasible_points": [0.05]
+    },
+    "decay_steps_factor": {
+        "feasible_points": [1]
+    }
+}
