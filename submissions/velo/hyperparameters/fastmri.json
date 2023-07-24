@@ -1,5 +1,8 @@
 {
     "total_steps": {
         "feasible_points": [38034]
+    },
+    "partial": {
+        "feasible_points": [0]
     }
 }

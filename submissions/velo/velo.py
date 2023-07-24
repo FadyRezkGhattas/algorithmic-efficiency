@@ -112,6 +112,10 @@ def update_params(workload: spec.Workload,
   del loss_type
   del eval_results
 
+  if hasattr(hyperparameters, 'partial'):
+    if hyperparameters.partial == 1 and global_step >= hyperparameters.total_steps:
+      raise spec.TrainingCompleteError
+
   optimizer_state, opt_update_fn = optimizer_state
   per_device_rngs = jax.random.split(rng, jax.local_device_count())
   if hasattr(hyperparameters, 'label_smoothing'):
