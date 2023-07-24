@@ -27,8 +27,13 @@ def init_optimizer_state(workload: spec.Workload,
   del rng
 
   # Create learning rate schedule.
-  lr_schedule_fn = create_lr_schedule_fn(workload.step_hint,
-                                         hyperparameters)
+  if hyperparameters.schedule == 1:
+    lr_schedule_fn = create_lr_schedule_fn(workload.step_hint,
+                                          hyperparameters)
+  elif hyperparameters.schedule == 0:
+    lr_schedule_fn = hyperparameters.learning_rate
+  else:
+    raise Exception(f"Unknown value {hyperparameters.schedule} for schedule hyperparameters")
 
   # Create optimizer.
   params_zeros_like = jax.tree_map(lambda s: jnp.zeros(s.shape_tuple),

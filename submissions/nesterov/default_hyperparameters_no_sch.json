@@ -11,10 +11,7 @@
     "warmup_steps": {
         "feasible_points": [0.05]
     },
-    "decay_steps_factor": {
-        "feasible_points": [1]
-    },
     "schedule": {
-        "feasible_points": [1]
+        "feasible_points": [0]
     }
 }
