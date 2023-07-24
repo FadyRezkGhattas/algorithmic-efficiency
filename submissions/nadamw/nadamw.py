@@ -141,16 +141,17 @@ def scale_by_learning_rate(learning_rate, flip_sign=True):
 
 def jax_cosine_warmup(step_hint: int, hyperparameters):
   # Create learning rate schedule.
+  warmup_steps = step_hint * hyperparameters.warmup_steps
   warmup_fn = optax.linear_schedule(
       init_value=0.,
       end_value=hyperparameters.learning_rate,
-      transition_steps=hyperparameters.warmup_steps)
-  cosine_steps = max(step_hint - hyperparameters.warmup_steps, 1)
+      transition_steps=warmup_steps)
+  cosine_steps = max(step_hint - warmup_steps, 1)
   cosine_fn = optax.cosine_decay_schedule(
       init_value=hyperparameters.learning_rate, decay_steps=cosine_steps)
   schedule_fn = optax.join_schedules(
       schedules=[warmup_fn, cosine_fn],
-      boundaries=[hyperparameters.warmup_steps])
+      boundaries=[warmup_steps])
   return schedule_fn
 
 def init_optimizer_state(workload: spec.Workload,
@@ -164,7 +165,7 @@ def init_optimizer_state(workload: spec.Workload,
   del rng
 
   target_setting_step_hint = int(0.75 * workload.step_hint)
-  lr_schedule_fn = cosine_warmup.jax_cosine_warmup(target_setting_step_hint,
+  lr_schedule_fn = jax_cosine_warmup(target_setting_step_hint,
                                                    hyperparameters)
 
   # Create optimizer.
