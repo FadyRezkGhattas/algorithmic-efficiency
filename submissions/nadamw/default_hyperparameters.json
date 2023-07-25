@@ -23,5 +23,10 @@
         "feasible_points": [
             0
         ]
+    },
+    "alpha": {
+        "feasible_points": [
+            1e-4
+        ]
     }
 }

@@ -148,7 +148,7 @@ def jax_cosine_warmup(step_hint: int, hyperparameters):
       transition_steps=warmup_steps)
   cosine_steps = max(step_hint - warmup_steps, 1)
   cosine_fn = optax.cosine_decay_schedule(
-      init_value=hyperparameters.learning_rate, decay_steps=cosine_steps)
+      init_value=hyperparameters.learning_rate, decay_steps=cosine_steps, alpha=hyperparameters.alpha)
   schedule_fn = optax.join_schedules(
       schedules=[warmup_fn, cosine_fn],
       boundaries=[warmup_steps])
