@@ -16,5 +16,10 @@
     },
     "schedule": {
         "feasible_points": [1]
+    },
+    "end_value": {
+        "feasible_points": [
+            0.001
+        ]
     }
 }

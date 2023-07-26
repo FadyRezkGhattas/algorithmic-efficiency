@@ -59,7 +59,7 @@ def create_lr_schedule_fn(
   decay_steps = step_hint - warmup_steps
   polynomial_schedule_fn = optax.polynomial_schedule(
       init_value=hyperparameters.learning_rate,
-      end_value=0,
+      end_value=hyperparameters.end_value,
       power=1,
       transition_steps=decay_steps)
   lr_schedule_fn = optax.join_schedules(
