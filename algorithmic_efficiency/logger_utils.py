@@ -276,7 +276,7 @@ class MetricLogger(object):
     if events_dir:
       self._tb_metric_writer = metric_writers.create_default_writer(events_dir)
       if wandb is not None and self.use_wandb:
-        wandb.init(
+        wandb.init(name=configs.experiment_name,
             dir=events_dir, tags=[flags.FLAGS.workload, flags.FLAGS.framework])
         wandb.config.update(configs)
         wandb.config.update(hyperparameters._asdict())
