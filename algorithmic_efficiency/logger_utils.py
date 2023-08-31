@@ -276,10 +276,14 @@ class MetricLogger(object):
     if events_dir:
       self._tb_metric_writer = metric_writers.create_default_writer(events_dir)
       if wandb is not None and self.use_wandb:
-        wandb.init(name=configs.experiment_name,
-            dir=events_dir, tags=[flags.FLAGS.workload, flags.FLAGS.framework])
-        wandb.config.update(configs)
-        wandb.config.update(hyperparameters._asdict())
+        if configs.resume_last_run:
+          wandb.init(id=configs.wandb_run_id,
+            dir=events_dir, tags=[flags.FLAGS.workload, flags.FLAGS.framework], resume="must")
+        else:
+          wandb.init(name=configs.experiment_name,
+              dir=events_dir, tags=[flags.FLAGS.workload, flags.FLAGS.framework])
+          wandb.config.update(configs)
+          wandb.config.update(hyperparameters._asdict())
 
   def append_scalar_metrics(self,
                             metrics: dict,

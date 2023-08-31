@@ -145,6 +145,7 @@ flags.DEFINE_boolean(
 flags.DEFINE_boolean('resume_last_run',
                      None,
                      'Whether to resume the experiment from its last run.')
+flags.DEFINE_string('wandb_run_id', None, 'The WandB run id. This is used when resume_last_run is true with the resume="must" flag.')
 flags.DEFINE_boolean(
     'append_timestamp',
     False,
