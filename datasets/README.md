@@ -163,3 +163,13 @@ python3 submission_runner.py \
 ```
 ### WMT
 
+```
+python3 submission_runner.py \
+    --framework=jax \
+    --workload=wmt \
+    --experiment_dir=/wmt_test/ \
+    --experiment_name=wmt_test \
+    --submission_path=reference_algorithms/target_setting_algorithms/jax_nadamw.py \
+    --tuning_search_space=reference_algorithms/target_setting_algorithms/wmt/tuning_search_space.json \
+    --data_dir=/data0/wmt
+```
