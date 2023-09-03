@@ -150,6 +150,8 @@ def get_batch_size(workload_name):
     return 1024
   elif workload_name == 'ogbg':
     return 512
+  elif workload_name == 'wmt':
+    return 128
   elif workload_name == 'mnist':
     return 64
   else:
